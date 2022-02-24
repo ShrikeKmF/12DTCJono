@@ -52,9 +52,9 @@ def add_user():
 
 def add_book():
     title = input("Enter a new books title: ").title()
-    author = input("Enter a new books author: ").author()
-    dewey = input("Enter a new books dewey code: ").dewey()
-    isbn = input("Enter a new books isbn code: ").isbn()
+    author = input("Enter a new books author: ").title()
+    dewey = input("Enter a new books dewey code: ").upper()
+    isbn = input("Enter a new books isbn code: ")
     Book(title, author, dewey, isbn)
     print(f"{title} has been added to the book list")
 
