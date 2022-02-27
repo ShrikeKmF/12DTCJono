@@ -8,6 +8,7 @@ class Student:
         self.subjects = []
         self.gender = True
         self.enrolled = True
+        student_list.append(self)
 
     def student_details(self):
         print(self.name)
@@ -20,9 +21,28 @@ class Student:
         print("###############################")
 
 
+def print_student_info():
+    for book in student_list:
+        book.book_details()
+
+
+def select_student_age():
+    student_age = input("Enter the age of the student: ")
+    for student in student_list:
+        if student.age >= student_age:
+            print(f"This student {student.name} is over the age of 17")
+            return student
+    print("Sorry no student with that age range has been found")
+    return None
+
+
+student_list = []
+
 # Students Testing List
-Student("Bob", "18", "021-0263674", "BNNL", " 13SMX", True)
-Student("Lisa", "16", "022-4567123", "SKWR", " 13DTC,13SMX", False)
-Student("Patrick", "18", " 023-01234567", " SCBE", " 13ENG, 13CMX, 135MX, "
+Student("Bob", "18", "021-0263674", "BNNL", "13SMX", True)
+Student("Lisa", "16", "022-4567123", "SKWR", "13DTC, 13SMX", False)
+Student("Patrick", "18", " 023-01234567", "SCBE", "13ENG, 13CMX, 135MX, "
                                                    "13DTC", True)
-Student("Karen", "17", "123-4567", "WNLR", "13DTC,13SMX", True)
+Student("Karen", "17", "123-4567", "WNLR", "13DTC, 13SMX", False)
+
+select_student_age()
