@@ -1,3 +1,6 @@
+import time
+
+
 class Student:
     def __init__(self, name, age, phone_number, form_class, subjects,
                  gender):
@@ -55,6 +58,7 @@ def select_student_age():
     for student in student_list:
         if student.age >= student_age:
             Student.student_details(student)
+    time.sleep(2)
 
 
 def generate_students():
@@ -76,7 +80,12 @@ def count_students(listCount):
     for student in student_list:
         if studentClass in student.subjects:
             listCount += 1
+    for teacher in teacher_list:
+        if studentClass in teacher.subject:
+            listTeach = teacher.name
     print(f"There are '{listCount}' students in that class")
+    print(f"The Teacher is '{listTeach}' for that class")
+    time.sleep(2)
 
 
 def find_student():
@@ -103,14 +112,30 @@ def add_student():
 def purge_student():
     student = find_student()
     print()
-    if not student:
-        print(f"Sorry, '{student.name}' is not on record")
-    else:
+    if student:
         confirm = input("Type Y if you want to purge this student: "
                         "").upper()
         if confirm == "Y":
             print(f"Student Name: {student.name} is now purged")
-            student_list.remove(student.name)
+            student_list.remove(student)
+    else:
+        print(f"Sorry, '{student}' is not on record")
+
+
+def find_gender(genderCount):
+    student_gender_find = input("Which gender do you want to find: ").title()
+    if student_gender_find == "Male":
+        for student in student_list:
+            if student.is_male:
+                print(student.name)
+                genderCount += 1
+    if student_gender_find == "Female":
+        for student in student_list:
+            if not student.is_male:
+                print(student.name)
+                genderCount += 1
+    print(f"There are '{genderCount}' '{student_gender_find}' Students")
+    time.sleep(2)
 
 
 def menu():
@@ -121,11 +146,12 @@ def menu():
         print("1. Student List")
         print("2. Students in Subject")
         print("3. Find Student")
-        print("4. Students Above the Age of")
+        print("4. Students Finder Age")
         print("5. Add new Student")
         print("6. Delete Student")
         print("7. Teacher List")
-        print("8. Exit")
+        print("8. Student List by Gender")
+        print("9. Exit")
         print("#############################")
         choice = input("\nWhat would you like to do: ")
         if choice == "1":
@@ -143,6 +169,8 @@ def menu():
         elif choice == "7":
             print_teacher_info()
         elif choice == "8":
+            find_gender(genderCount)
+        elif choice == "9":
             new_action = False
         else:
             print("That is not a menu item please try again ")
@@ -150,6 +178,7 @@ def menu():
 
 
 listCount = 0
+genderCount = 0
 student_list = []
 teacher_list = []
 
